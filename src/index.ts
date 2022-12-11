@@ -4,6 +4,7 @@ import { v4 as uuidV4 } from "uuid";
 import { USER_AGENT } from "./constants.js";
 import { getSession } from "./get-session.js";
 import { ConversationPayload } from "./interfaces.js";
+import { parseResponse } from "./utils.js";
 
 dotenv.config();
 
@@ -58,5 +59,11 @@ class ChatGPTApi {
       }
     );
     return res.data;
+  }
+
+  async response(message: string) {
+    const conversation = await this.getConversation(message);
+    const response = parseResponse(conversation);
+    return response;
   }
 }
