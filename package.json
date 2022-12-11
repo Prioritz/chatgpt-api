@@ -1,5 +1,5 @@
 {
-  "name": "chatgpt-api",
+  "name": "chatgptapi",
   "version": "0.1.0",
   "description": "Wrapper around ChatGPT API",
   "main": "dist/index.js",
