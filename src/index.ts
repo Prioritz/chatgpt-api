@@ -9,12 +9,14 @@ import { parseResponse } from "./utils.js";
 dotenv.config();
 
 class ChatGPTApi {
+  sessionToken: string;
   accessToken: string | null;
   apiBaseUrl: string;
   backendApiBaseUrl: string;
   userAgent: string;
 
-  constructor() {
+  constructor(sessionToken: string) {
+    this.sessionToken = sessionToken;
     this.accessToken = null;
     this.apiBaseUrl = "https://chat.openai.com/api";
     this.backendApiBaseUrl = "https://chat.openai.com/backend-api";
@@ -23,7 +25,7 @@ class ChatGPTApi {
 
   async getAccessToken() {
     if (!this.accessToken) {
-      this.accessToken = await getSession();
+      this.accessToken = await getSession(this.sessionToken);
     }
 
     return this.accessToken;
@@ -67,3 +69,5 @@ class ChatGPTApi {
     return response;
   }
 }
+
+export { ChatGPTApi };

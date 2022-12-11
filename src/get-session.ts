@@ -1,10 +1,10 @@
 import axios from "axios";
 import { USER_AGENT } from "./constants";
 
-export const getSession = async () => {
+export const getSession = async (sessionToken: string) => {
   const res = (await axios.get("https://chat.openai.com/api/auth/session", {
     headers: {
-      cookie: `__Secure-next-auth.session-token=${process.env.SESSION_TOKEN}`,
+      cookie: `__Secure-next-auth.session-token=${sessionToken}`,
       "user-agent": USER_AGENT,
     },
   })) as any;
