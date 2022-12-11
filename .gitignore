@@ -12,3 +12,9 @@ env
 
 # yarn
 yarn.lock
+
+# idea
+.idea
+
+# vscode
+.vscode
