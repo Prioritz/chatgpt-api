@@ -1,0 +1,20 @@
+# node_modules
+node_modules
+
+# dist
+dist
+
+# env
+env
+.env.*
+*.env
+*.env.*
+
+# yarn
+yarn.lock
+
+# idea
+.idea
+
+# vscode
+.vscode
