@@ -1,6 +1,6 @@
 {
   "name": "gptchat",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Wrapper around ChatGPT API",
   "main": "dist/index.js",
   "repository": "https://github.com/rajeshberwal/chatgpt-api.git",

@@ -16,7 +16,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
-const api = new ChatGPTApi(process.env.SESSION_TOKEN);
+const api = new ChatGPTApi(process.env.COOKIE);
 
 async function main() {
   const response = await api.response("what is the weather like today?");
@@ -32,7 +32,7 @@ Result:
 I'm sorry, but I am not able to access current weather information because I am a large language model trained by OpenAI and do not have access to the internet. I am only able to provide information based on the text that I was trained on, which has a knowledge cutoff of 2021. Is there something else I can help you with?
 ```
 
-To get a session token login to [ChatGPT](https://chatgpt.com) and copy the session token from the browser's cookies.
+To get a cookie login to [ChatGPT](<(https://chat.openai.com/)>) and copy the cookie from the request header from network tab.
 
 ## Contributing
 
