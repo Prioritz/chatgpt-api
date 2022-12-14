@@ -2,6 +2,7 @@ import axios from "axios";
 import * as dotenv from "dotenv";
 import { v4 as uuidV4 } from "uuid";
 import { USER_AGENT } from "./constants.js";
+import { getCookie } from "./get-cookie.js";
 import { getSession } from "./get-session.js";
 import { ConversationPayload } from "./interfaces.js";
 import { parseResponse } from "./utils.js";
@@ -9,14 +10,14 @@ import { parseResponse } from "./utils.js";
 dotenv.config();
 
 class ChatGPTApi {
-  sessionToken: string;
+  requestCookie: string;
   accessToken: string | null;
   apiBaseUrl: string;
   backendApiBaseUrl: string;
   userAgent: string;
 
-  constructor(sessionToken: string) {
-    this.sessionToken = sessionToken;
+  constructor(requestCookie: string) {
+    this.requestCookie = requestCookie;
     this.accessToken = null;
     this.apiBaseUrl = "https://chat.openai.com/api";
     this.backendApiBaseUrl = "https://chat.openai.com/backend-api";
@@ -25,7 +26,7 @@ class ChatGPTApi {
 
   async getAccessToken() {
     if (!this.accessToken) {
-      this.accessToken = await getSession(this.sessionToken);
+      this.accessToken = await getSession(this.requestCookie);
     }
 
     return this.accessToken;
@@ -33,6 +34,7 @@ class ChatGPTApi {
 
   async getConversation(message: string) {
     const accessToken = await this.getAccessToken();
+    const cookie = getCookie(this.requestCookie);
     const body: ConversationPayload = {
       action: "next",
       messages: [
@@ -55,6 +57,7 @@ class ChatGPTApi {
       {
         headers: {
           authorization: `Bearer ${accessToken}`,
+          cookie,
           "Content-Type": "application/json",
           "user-agent": this.userAgent,
         },
